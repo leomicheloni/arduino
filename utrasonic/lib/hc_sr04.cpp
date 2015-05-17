@@ -1,16 +1,7 @@
-class Ultrasonic
-{
-  public:
-    Ultrasonic(int TP, int EP);
-    long Ranging(int sys);
+#include "Arduino.h"
+#include "hc_sr04.h"
 
-  private:
-    int Trig_pin;
-    int Echo_pin;
-    long Time_out;
-    long duration,distacne;
-};
-
+// TP => trigger digital input, EP => echo digital input
 Ultrasonic::Ultrasonic(int TP, int EP)
 {
    pinMode(TP,OUTPUT);
@@ -20,6 +11,7 @@ Ultrasonic::Ultrasonic(int TP, int EP)
    Time_out=3000;
 }
 
+// return distance in centimetres
 long Ultrasonic::Ranging()
 {
   digitalWrite(Trig_pin, LOW);
@@ -34,6 +26,5 @@ long Ultrasonic::Ranging()
 	duration = Time_out; 
   }
 
-  distacne = duration /29 / 2 ;
-  return distacne;
+  return duration /29 / 2 ;
 }
